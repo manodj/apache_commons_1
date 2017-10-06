@@ -1238,10 +1238,13 @@ public class FileUtils {
         if (file.isDirectory()) {
             deleteDirectory(file);
         } else {
-            if (!file.exists()) {
+            boolean file_exist;
+            file_exist = file.exists();
+            if (!file.delete()) {
+                if (!file_exist){
                 throw new FileNotFoundException("File does not exist: " + file);
             }
-            if (!file.delete()) {
+
                 String message =
                     "Unable to delete file: " + file;
                 throw new IOException(message);
@@ -1568,3 +1571,4 @@ public class FileUtils {
     }
 
 }
+
